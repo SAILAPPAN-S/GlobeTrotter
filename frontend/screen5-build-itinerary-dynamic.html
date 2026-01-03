@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Build Itinerary | GlobalTrotter</title>
+
+<style>
+:root{
+  --secondary:#0f172a;
+  --bg:#f4f6fb;
+  --border:#d1d5ff;
+  --primary:#2563eb;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:"Segoe UI", Arial, sans-serif;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+}
+
+/* Header */
+header{
+  background:var(--secondary);
+  color:white;
+  padding:14px 28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h2{
+  margin:0;
+}
+
+/* Page */
+.page{
+  width:90%;
+  max-width:1100px;
+  margin:25px auto;
+  background:white;
+  border-radius:16px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.08);
+  padding:24px;
+}
+
+/* Section Card */
+.itinerary-section{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.itinerary-section h3{
+  margin:0 0 10px;
+}
+
+.itinerary-section p{
+  margin:0 0 16px;
+  color:#334155;
+}
+
+/* Input Row */
+.input-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+input, textarea{
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  width:100%;
+}
+
+/* Add Section */
+.add-section{
+  display:flex;
+  justify-content:center;
+  margin-top:25px;
+}
+
+.add-section button{
+  padding:14px 22px;
+  font-size:16px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:white;
+  cursor:pointer;
+}
+
+/* Modal */
+.modal{
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.4);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  background:white;
+  padding:24px;
+  border-radius:14px;
+  width:90%;
+  max-width:500px;
+}
+
+.modal-content h3{
+  margin-top:0;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:15px;
+}
+
+.modal-actions button{
+  padding:10px 16px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+}
+
+.save{ background:var(--primary); color:white; }
+.cancel{ background:#e5e7eb; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>GlobalTrotter</h2>
+  <div style="width:36px;height:36px;border-radius:50%;background:#e0e7ff"></div>
+</header>
+
+<div class="page">
+
+  <div id="sectionsContainer"></div>
+
+  <div class="add-section">
+    <button onclick="openModal()">＋ Add another Section</button>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Add Itinerary Section</h3>
+
+    <input id="title" placeholder="Section Title (e.g. Hotel, Travel)">
+    <textarea id="description" rows="3" placeholder="Section Description"></textarea>
+
+    <div class="input-row">
+      <input id="dateRange" placeholder="Date Range (e.g. 10 Jan – 12 Jan)">
+      <input id="budget" placeholder="Budget">
+    </div>
+
+    <div class="modal-actions">
+      <button class="cancel" onclick="closeModal()">Cancel</button>
+      <button class="save" onclick="addSection()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let sectionCount = 0;
+const sections = [];
+
+function openModal(){
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+  document.getElementById("title").value = "";
+  document.getElementById("description").value = "";
+  document.getElementById("dateRange").value = "";
+  document.getElementById("budget").value = "";
+}
+
+function addSection(){
+  const title = document.getElementById("title").value;
+  const description = document.getElementById("description").value;
+  const dateRange = document.getElementById("dateRange").value;
+  const budget = document.getElementById("budget").value;
+
+  if(!title || !dateRange || !budget){
+    alert("Please fill required fields");
+    return;
+  }
+
+  sectionCount++;
+
+  sections.push({ title, description, dateRange, budget });
+
+  const sectionHTML = `
+    <div class="itinerary-section">
+      <h3>Section ${sectionCount}: ${title}</h3>
+      <p>${description}</p>
+      <div class="input-row">
+        <input value="${dateRange}" disabled>
+        <input value="${budget}" disabled>
+      </div>
+    </div>
+  `;
+
+  document.getElementById("sectionsContainer").insertAdjacentHTML("beforeend", sectionHTML);
+
+  closeModal();
+}
+</script>
+
+</body>
+</html>
