@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Flask Auth Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('home') }}">GlobeTrotter</a>
+    <div class="ml-auto">
+        {% if 'user_id' in session %}
+            <!-- User logged in -->
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary mr-2">Dashboard</a>
+            <a href="{{ url_for('my_trips') }}" class="btn btn-outline-info mr-2">My Trips</a>
+            <a href="{{ url_for('profile') }}" class="btn btn-outline-secondary mr-2">Profile</a>
+            <!-- In base.html, logged in section -->
+<a href="{{ url_for('create_trip') }}" class="btn btn-success mr-2">New Itinerary</a>
+<a href="{{ url_for('activity_search') }}" class="btn btn-outline-warning mr-2">Activities</a>
+<a href="{{ url_for('city_search') }}" class="btn btn-outline-info mr-2">Cities</a>
+
+
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+        {% else %}
+            <!-- User not logged in -->
+            <a href="{{ url_for('login') }}" class="btn btn-outline-primary mr-2">Login</a>
+            <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
+        {% endif %}
+
+
+    </div>
+</nav>
+
+
+<div class="container mt-4">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="alert alert-info" role="alert">
+            {{ msg }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome!</h1>
+        <p class="lead">This is the home page for your Flask authentication demo.</p>
+        <hr class="my-4">
+        <p>Use the buttons in the navbar to login or register.</p>
+    </div>
+    {% endblock %}
+</div>
+
+</body>
+</html>

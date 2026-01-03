@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ trip.place }} Budget</h2>
+    
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-center bg-primary text-white">
+                <div class="card-body">
+                    <h3>${{ (trip.budget or 0)|round(2) }}</h3>
+                    <p>Total Budget</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real sections budget breakdown -->
+    {% set total_spent = sections|sum(attribute='budget')|default(0) %}
+    {% set categories = [
+        {'name': 'Transport', 'amount': 450},
+        {'name': 'Stay', 'amount': (sections|length * 150)|default(0)},
+        {'name': 'Activities', 'amount': total_spent}
+    ] %}
+
+    <canvas id="budgetChart" height="300"></canvas>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h5>Breakdown ({{ sections|length }} sections)</h5>
+            <ul class="list-group">
+                {% for section in sections %}
+                <li class="list-group-item d-flex justify-content-between">
+                    {{ section.sectionname }} <span>${{ section.budget or 0 }}</span>
+                </li>
+                {% endfor %}
+                <li class="list-group-item d-flex justify-content-between font-weight-bold">
+                    Total <span>${{ total_spent|round(2) }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('budgetChart').getContext('2d');
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: [{% for cat in [{'Transport'}, {'Stay'}, {'Activities'}] %}'{{ cat.name }}',{% endfor %}],
+        datasets: [{
+            data: [450, {{ sections|length * 150 }}, {{ total_spent }}],
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        }]
+    }
+});
+</script>
+{% endblock %}

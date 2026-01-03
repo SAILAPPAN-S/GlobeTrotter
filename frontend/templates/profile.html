@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+
+  <!-- Top Profile Row -->
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+      <div class="row align-items-center">
+
+        <!-- Left: Avatar -->
+        <div class="col-md-3 text-center">
+          <div class="rounded-circle mx-auto d-flex align-items-center justify-content-center"
+               style="width:180px;height:180px;border:2px solid #ddd;background:#f8f9fa;font-size:48px;">
+            {{ (user.firstname[:1] if user.firstname else 'U')|upper }}
+          </div>
+          <div class="mt-2 text-muted small">{{ user.city }}, {{ user.country }}</div>
+        </div>
+
+        <!-- Right: Details Box -->
+        <div class="col-md-9">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h3 class="mb-1">{{ user.firstname }} {{ user.lastname }}</h3>
+              <p class="mb-1"><b>Email:</b> {{ user.email }}</p>
+              <p class="mb-1"><b>Phone:</b> {{ user.phone }}</p>
+              <p class="mb-0"><b>Location:</b> {{ user.city }}, {{ user.country }}</p>
+            </div>
+
+          </div>
+
+          <hr>
+
+          <div class="row text-center">
+            <div class="col-sm-4">
+              <h5 class="mb-0">{{ preplanned_trips|length }}</h5>
+              <small class="text-muted">Preplanned Trips</small>
+            </div>
+            <div class="col-sm-4">
+              <h5 class="mb-0">{{ previous_trips|length }}</h5>
+              <small class="text-muted">Previous Trips</small>
+            </div>
+            <div class="col-sm-4">
+              <h5 class="mb-0">{{ (preplanned_trips|length + previous_trips|length) }}</h5>
+              <small class="text-muted">Total Trips</small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preplanned Trips -->
+  <h4 class="mb-3">Preplanned Trips</h4>
+  {% if preplanned_trips %}
+  <div class="row">
+    {% for t in preplanned_trips %}
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body">
+          <h5 class="card-title mb-1">{{ t.place }}</h5>
+          <div class="text-muted small mb-2">{{ t.startdate }} → {{ t.enddate }}</div>
+          <div class="text-muted small mb-3">{{ (t.description or '')[:90] }}{% if (t.description or '')|length > 90 %}...{% endif %}</div>
+          <a href="{{ url_for('itinerary_builder', trip_id=t.id) }}" class="btn btn-outline-secondary btn-sm">View</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-light border">No preplanned trips.</div>
+  {% endif %}
+
+  <!-- Previous Trips -->
+  <h4 class="mt-4 mb-3">Previous Trips</h4>
+  {% if previous_trips %}
+  <div class="row">
+    {% for t in previous_trips %}
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body">
+          <h5 class="card-title mb-1">{{ t.place }}</h5>
+          <div class="text-muted small mb-2">{{ t.startdate }} → {{ t.enddate }}</div>
+          <span class="badge badge-success mb-3">Completed</span>
+          <div>
+            <a href="{{ url_for('itinerary_builder', trip_id=t.id) }}" class="btn btn-outline-secondary btn-sm">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-light border">No previous trips yet.</div>
+  {% endif %}
+
+</div>
+{% endblock %}

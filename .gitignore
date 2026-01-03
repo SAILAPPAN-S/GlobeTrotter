@@ -1,0 +1,18 @@
+# SQLite Database
+*.db
+backend/instance/
+
+# Python caching
+__pycache__/
+backend/__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv
+venv/
+env/
+
+# IDE files
+.vscode/
+.idea/

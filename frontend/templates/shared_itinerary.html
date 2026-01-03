@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ trip.place }} - Public Itinerary{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <div class="alert alert-info">
+        <h5>Public Itinerary</h5>
+        Share: <code>http://127.0.0.1:5000/shared/{{ trip.id }}</code>
+    </div>
+    
+    <h2>{{ trip.place }}</h2>
+    
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Overview</h5>
+                    <p>{{ trip.description }}</p>
+                    <p><strong>{{ trip.startdate }} - {{ trip.enddate }}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-success btn-block mb-2">Copy This Trip</button>
+            <button class="btn btn-primary btn-block">Share on Social</button>
+        </div>
+    </div>
+
+    <h5>Day-by-Day Plan</h5>
+    <div class="list-group">
+        <div class="list-group-item">
+            <h6>Day 1 - Paris</h6>
+            <ul>
+                <li>Eiffel Tower ($25)</li>
+                <li>River Cruise ($40)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

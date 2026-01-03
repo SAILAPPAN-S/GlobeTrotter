@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Banner Section -->
+<div class="jumbotron bg-primary text-white text-center mb-5 p-5"
+    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <h1 class="display-4 mb-4">GlobeTrotter</h1>
+    <p class="lead mb-4">Discover, Plan, Travel</p>
+    <a href="{{ url_for('create_trip') }}" class="btn btn-success btn-lg px-5 mr-2">+ Plan a Trip</a>
+    <a href="{{ url_for('calendar') }}" class="btn btn-outline-light btn-lg px-4">View Calendar</a>
+</div>
+
+<div class="container">
+    <!-- Search Bar -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-10">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" placeholder="Search destinations, activities...">
+                <div class="input-group-append">
+
+                    <button class="btn btn-outline-secondary">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Regional Selections -->
+    <section class="mb-5">
+        <h2 class="mb-4">🌟 Top Regional Selections</h2>
+        <div class="row">
+            <!-- Popular trips passed from backend -->
+            {% for popular_trip in popular_trips %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-img-top bg-gradient-primary text-white text-center py-4 rounded-top">
+                        <h5>{{ popular_trip.place[:3]|upper }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title">{{ popular_trip.place }}</h6>
+                        <p class="text-muted small">{{ popular_trip.startdate }} - {{ popular_trip.enddate }}</p>
+                        <p class="card-text">{{ popular_trip.description[:60] }}...</p>
+                        <a href="{{ url_for('shared_itinerary', trip_id=popular_trip.id) }}"
+                            class="btn btn-outline-primary btn-sm">View Itinerary</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Previous Trips (User's Completed) -->
+    <section>
+        <h2 class="mb-4">📚 Your Previous Trips</h2>
+        {% if user_trips %}
+        <div class="row">
+            {% for t in user_trips %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-img-top bg-gradient-success text-white text-center py-4 rounded-top">
+                        <h5>{{ t.place[:3]|upper }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>{{ t.place }}</h6>
+                        <p class="text-muted small">{{ t.startdate }} - {{ t.enddate }}</p>
+                        <span class="badge badge-success">{{ t.status }}</span>
+                        <a href="{{ url_for('trip_calendar', trip_id=t.id) }}"
+                            class="btn btn-outline-success btn-sm mt-2">View Recap</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info text-center">
+            <h4>No completed trips yet</h4>
+            <p>Create your first adventure and it will appear here!</p>
+            <a href="{{ url_for('create_trip') }}" class="btn btn-primary btn-lg">Start Planning</a>
+        </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

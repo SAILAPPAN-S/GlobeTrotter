@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+
+    
+    <h2>New Itinerary</h2>
+    
+    <form method="POST">
+        <div class="card">
+            <div class="card-header">
+                <h5>Trip Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Trip Name</label>
+                    <input type="text" name="trip_name" class="form-control" placeholder="Europe Summer 2026" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Start Date</label>
+                        <input type="date" name="startdate" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>End Date</label>
+                        <input type="date" name="enddate" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" rows="3" placeholder="Family vacation across 3 cities..."></textarea>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg mt-3">Save Trip & Continue</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary btn-lg mt-3">Cancel</a>
+    </form>
+</div>
+
+<script>
+function addStop() {
+    // Modal or dynamic row for adding tripsections
+    alert('Add first stop (Paris, London, etc.) - connects to tripsections table');
+}
+</script>
+{% endblock %}

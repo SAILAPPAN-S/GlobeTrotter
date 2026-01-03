@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Search Cities</h2>
+    <input type="text" class="form-control mb-3" placeholder="Search cities..." id="citySearch">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://via.placeholder.com/300x200" class="card-img-top">
+                <div class="card-body">
+                    <h5>Paris, France</h5>
+                    <p>Cost Index: Medium | Popular</p>
+                    <a href="#" class="btn btn-success">Add to Trip</a>
+                </div>
+            </div>
+        </div>
+        <!-- More city cards -->
+    </div>
+</div>
+{% endblock %}
