@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>GlobalTrotter – All 12 Screens</title>
+
+<style>
+:root{
+ --primary:#2563eb;
+ --secondary:#0f172a;
+ --accent:#22c55e;
+ --bg:#f8fafc;
+}
+
+*{box-sizing:border-box;font-family:Segoe UI,sans-serif}
+
+body{margin:0;background:var(--bg)}
+
+header{
+ background:var(--secondary);
+ color:white;
+ padding:15px 25px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+
+nav button{
+ margin-left:6px;
+ padding:8px 12px;
+ border:none;
+ border-radius:8px;
+ background:var(--primary);
+ color:white;
+ cursor:pointer
+}
+
+.container{width:90%;max-width:1200px;margin:25px auto}
+
+.screen{display:none}
+
+.card{
+ background:white;
+ padding:20px;
+ border-radius:14px;
+ box-shadow:0 10px 25px rgba(0,0,0,.08);
+ margin-bottom:20px
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:20px
+}
+
+.box{
+ height:140px;
+ background:#e0e7ff;
+ border-radius:14px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-weight:600;
+ color:var(--primary);
+ text-align:center
+}
+
+input,textarea{
+ width:100%;
+ padding:12px;
+ margin:8px 0;
+ border-radius:8px;
+ border:1px solid #cbd5f5
+}
+
+button{
+ padding:12px 18px;
+ border:none;
+ border-radius:10px;
+ background:var(--primary);
+ color:white;
+ cursor:pointer
+}
+
+.secondary{background:var(--accent)}
+
+.section-title{font-size:20px;font-weight:600;margin:20px 0}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>GlobalTrotter</h2>
+<nav>
+<button onclick="showScreen(1)">Login</button>
+<button onclick="showScreen(2)">Register</button>
+<button onclick="showScreen(3)">Home</button>
+<button onclick="showScreen(6)">Trips</button>
+<button onclick="showScreen(7)">Profile</button>
+<button onclick="showScreen(8)">Search</button>
+<button onclick="showScreen(9)">Itinerary</button>
+<button onclick="showScreen(10)">Community</button>
+<button onclick="showScreen(11)">Calendar</button>
+<button onclick="showScreen(12)">Admin</button>
+</nav>
+</header>
+
+<div class="container">
+
+<!-- SCREEN 1 LOGIN -->
+<div class="screen" id="screen1">
+<div class="card" style="max-width:400px;margin:auto">
+<h2>Login</h2>
+<input placeholder="Username">
+<input type="password" placeholder="Password">
+<button onclick="showScreen(3)">Login</button>
+</div>
+</div>
+
+<!-- SCREEN 2 REGISTER -->
+<div class="screen" id="screen2">
+<div class="card">
+<h2>Create Account</h2>
+<div class="grid">
+<input placeholder="First Name">
+<input placeholder="Last Name">
+<input placeholder="Email">
+<input placeholder="Phone">
+<input placeholder="City">
+<input placeholder="Country">
+</div>
+<textarea placeholder="About you"></textarea>
+<button>Register</button>
+</div>
+</div>
+
+<!-- SCREEN 3 HOME -->
+<div class="screen" id="screen3">
+<div class="card"><h1 style="text-align:center">Explore Your Next Adventure ✈️</h1></div>
+<div class="section-title">Top Destinations</div>
+<div class="grid">
+<div class="box">Paris</div>
+<div class="box">Bali</div>
+<div class="box">Dubai</div>
+<div class="box">Tokyo</div>
+</div>
+<button style="margin-top:20px" onclick="showScreen(4)">+ Plan a Trip</button>
+</div>
+
+<!-- SCREEN 4 CREATE TRIP -->
+<div class="screen" id="screen4">
+<div class="card">
+<h2>Plan a New Trip</h2>
+<input type="date">
+<input placeholder="Destination">
+<input type="date">
+<input type="date">
+</div>
+</div>
+
+<!-- SCREEN 5 BUILD ITINERARY -->
+<div class="screen" id="screen5">
+<div class="card">
+<h3>Day 1 – City Tour</h3>
+<input placeholder="Activity">
+<input placeholder="Budget">
+</div>
+<button class="secondary">+ Add Day</button>
+</div>
+
+<!-- SCREEN 6 TRIPS -->
+<div class="screen" id="screen6">
+<div class="section-title">Ongoing</div>
+<div class="card">Paris Getaway</div>
+<div class="section-title">Upcoming</div>
+<div class="card">Bali Adventure</div>
+<div class="section-title">Completed</div>
+<div class="card">Goa Trip</div>
+</div>
+
+<!-- SCREEN 7 PROFILE -->
+<div class="screen" id="screen7">
+<div class="card" style="display:flex;gap:20px">
+<div class="box" style="width:120px;height:120px">Photo</div>
+<div>
+<h2>User Name</h2>
+<p>City, Country</p>
+<button>Edit Profile</button>
+</div>
+</div>
+</div>
+
+<!-- SCREEN 8 SEARCH -->
+<div class="screen" id="screen8">
+<div class="card"><input placeholder="Search cities or activities"></div>
+<div class="grid">
+<div class="box">Paris</div>
+<div class="box">Bali</div>
+<div class="box">Dubai</div>
+</div>
+</div>
+
+<!-- SCREEN 9 ITINERARY VIEW -->
+<div class="screen" id="screen9">
+<div class="card">
+<h2>Paris Trip Itinerary</h2>
+<p>Day-wise activities & expenses</p>
+</div>
+</div>
+
+<!-- SCREEN 10 COMMUNITY -->
+<div class="screen" id="screen10">
+<div class="card">
+<textarea placeholder="Share your travel experience"></textarea>
+<button>Post</button>
+</div>
+<div class="card">
+<h4>Paris Experience 🇫🇷</h4>
+<p>Amazing city and food!</p>
+</div>
+</div>
+
+<!-- SCREEN 11 CALENDAR -->
+<div class="screen" id="screen11">
+<div class="card">
+<h2 style="text-align:center">January 2024</h2>
+<div class="grid" style="grid-template-columns:repeat(7,1fr)">
+<strong>Sun</strong><strong>Mon</strong><strong>Tue</strong><strong>Wed</strong><strong>Thu</strong><strong>Fri</strong><strong>Sat</strong>
+<div></div><div></div><div></div><div></div><div></div><div class="box">1</div><div class="box">2</div>
+<div class="box">3</div><div class="box">4</div><div class="box">5</div>
+<div class="box">6<br><small>Paris</small></div>
+<div class="box">7</div><div class="box">8</div><div class="box">9</div>
+</div>
+</div>
+</div>
+
+<!-- SCREEN 12 ADMIN -->
+<div class="screen" id="screen12">
+<div class="card">
+<h2>Admin Dashboard</h2>
+<div class="grid">
+<button class="secondary">Manage Users</button>
+<button class="secondary">Popular Cities</button>
+<button class="secondary">Popular Activities</button>
+<button class="secondary">Analytics</button>
+</div>
+</div>
+
+<div class="grid">
+<div class="card"><div class="box">📊 Bar Chart</div></div>
+<div class="card"><div class="box">📈 Line Chart</div></div>
+<div class="card"><div class="box">🥧 Pie Chart</div></div>
+</div>
+</div>
+
+</div>
+
+<script>
+function showScreen(n){
+ document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
+ document.getElementById('screen'+n).style.display='block';
+}
+showScreen(1);
+</script>
+
+</body>
+</html>
