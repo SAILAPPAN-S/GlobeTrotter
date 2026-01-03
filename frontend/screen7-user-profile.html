@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>User Profile | GlobalTrotter</title>
+
+<style>
+:root{
+  --secondary:#0f172a;
+  --bg:#f4f6fb;
+  --border:#cbd5f5;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:"Segoe UI", Arial, sans-serif;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+}
+
+/* Header */
+header{
+  background:var(--secondary);
+  color:white;
+  padding:14px 28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h2{
+  margin:0;
+  font-weight:600;
+}
+
+/* Page Wrapper */
+.page{
+  width:90%;
+  max-width:1100px;
+  margin:25px auto;
+  background:white;
+  border-radius:16px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.08);
+  padding:24px;
+}
+
+/* Profile Top */
+.profile-top{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:24px;
+  padding-bottom:24px;
+  border-bottom:1px solid var(--border);
+}
+
+/* Profile Image */
+.profile-image{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  border:2px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+}
+
+/* User Details */
+.user-details{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+  font-size:16px;
+}
+
+/* Section Titles */
+.section-title{
+  font-size:18px;
+  font-weight:600;
+  margin:24px 0 12px;
+}
+
+/* Trips Grid */
+.trips-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+/* Trip Card */
+.trip-card{
+  height:220px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:14px;
+}
+
+.trip-card button{
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:white;
+  cursor:pointer;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .profile-top{
+    grid-template-columns:1fr;
+    justify-items:center;
+  }
+  .trips-grid{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>GlobalTrotter</h2>
+</header>
+
+<div class="page">
+
+  <!-- Profile Section -->
+  <div class="profile-top">
+    <div class="profile-image">
+      Image of the User
+    </div>
+
+    <div class="user-details">
+      User Details with appropriate option to edit those information....
+    </div>
+  </div>
+
+  <!-- Preplanned Trips -->
+  <div class="section-title">Preplanned Trips</div>
+  <div class="trips-grid">
+    <div class="trip-card">
+      <button>View</button>
+    </div>
+    <div class="trip-card">
+      <button>View</button>
+    </div>
+    <div class="trip-card">
+      <button>View</button>
+    </div>
+  </div>
+
+  <!-- Previous Trips -->
+  <div class="section-title">Previous Trips</div>
+  <div class="trips-grid">
+    <div class="trip-card">
+      <button>View</button>
+    </div>
+    <div class="trip-card">
+      <button>View</button>
+    </div>
+    <div class="trip-card">
+      <button>View</button>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
