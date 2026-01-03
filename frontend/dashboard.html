@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  <h2>Dashboard</h2>
+
+  <button onclick="getTrips()">Get My Trips</button>
+  <button onclick="logout()">Logout</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    async function getTrips() {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch("http://127.0.0.1:5000/api/trips", {
+        headers: {
+          "Authorization": "Bearer " + token
+        }
+      });
+
+      const data = await res.json();
+      document.getElementById("output").innerText =
+        JSON.stringify(data, null, 2);
+    }
+
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
